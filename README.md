@@ -2,7 +2,7 @@
 
 ### Turn cybersecurity learning into a mission.
 
-**Cyber Avengers** is a gamified, browser-based cybersecurity platform that transforms security concepts into interactive challenges. Instead of only reading about cyber threats, players learn by investigating scenarios, solving problems, and testing their security knowledge through three core game experiences.
+**Cyber Avengers** is a gamified, browser-based learning platform that turns challenging concepts into interactive games. Players solve puzzles, tackle tricky problems, and test their skills through three distinct game experiences.
 
 <p align="center">
   <a href="https://cyberavengers.onrender.com/"><strong>🚀 Play Cyber Avengers</strong></a>
@@ -14,27 +14,25 @@
 
 ## 🎮 The Experience
 
-Cyber Avengers brings cybersecurity concepts to life through three game modes:
-
 ### 🐞 1. Bug Bounty
 Step into the role of a security researcher. Explore vulnerability-focused challenges, identify weaknesses, and think like an ethical hacker.
 
 ### 🔐 2. Cryptography
 Decode messages, solve cipher-based puzzles, and explore the fundamentals of encryption and secure communication.
 
-### 🕵️ 3. Network Investigation & Digital Forensics
-Investigate digital clues, analyze suspicious activity, and use evidence-based reasoning to understand what may have happened in a cyber incident.
+### ⚛️ 3. Quantum Calculations
+Take on tricky, math-inspired problems that challenge logical thinking, calculation skills, and problem-solving. These are not ordinary sums—they're designed to make players pause, think, and work through clever challenges.
 
-> Each game is designed to make cybersecurity more engaging through hands-on problem-solving and a mission-driven experience.
+> Each game offers a different way to engage, experiment, and sharpen problem-solving skills.
 
 ## ✨ Key Highlights
 
-- **Gamified learning:** cybersecurity concepts presented as interactive game challenges.
-- **Three distinct game modes:** Bug Bounty, Cryptography, and Network Investigation & Digital Forensics.
+- **Gamified learning:** concepts presented as interactive game challenges.
+- **Three distinct games:** Bug Bounty, Cryptography, and Quantum Calculations.
 - **Mission-driven interface:** a cinematic, technology-inspired experience built around the Cyber Avengers theme.
 - **Player progression and scoring:** challenge-focused gameplay designed to encourage improvement.
 - **Audio-visual atmosphere:** themed visual assets and sound effects help bring the experience to life.
-- **Built for real-world engagement:** demonstrated at an ITM University tech fest, where **20+ students played the platform**.
+- **Real-world engagement:** featured at an ITM University tech fest, where **20+ students played the platform**.
 
 ## 🏆 A Milestone for Our Team
 
@@ -49,7 +47,7 @@ A special milestone for our team: **Cyber Avengers became the first platform at 
 - **Anudeep Yellugani**
 
 **Mentorship & support**
-- **Anchal** — for supporting and guiding us throughout the project, from the initial stages to the final experience.
+- **Anchal Ma'am** — for supporting and guiding us throughout the project, from the initial stages to the final experience.
 - **Manali Ma'am** — Head of the Artificial Intelligence and Machine Learning (AIML) department at ITM University, for providing the opportunity to feature Cyber Avengers as a gamified experience at the tech fest.
 
 We are grateful to everyone who contributed their time, guidance, feedback, and encouragement.
@@ -116,15 +114,15 @@ Open the link in a modern browser and explore the available game modes.
 
 ## 🎯 Our Vision
 
-We want to make cybersecurity education more interactive, accessible, and memorable. Cyber Avengers is a step toward learning by doing—where every challenge encourages players to think critically, investigate carefully, and build security awareness.
+We want to make learning more interactive, accessible, and memorable. Cyber Avengers is a step toward learning by doing—where every challenge encourages players to think critically, experiment, and sharpen their problem-solving skills.
 
 ## 🤝 Acknowledgements
 
-Thank you to **Anchal**, **Manali Ma'am**, ITM University, and every student who tried the platform and helped make this experience meaningful.
+Thank you to **Anchal Ma'am**, **Manali Ma'am**, ITM University, and every student who tried the platform and helped make this experience meaningful.
 
 ---
 
 <p align="center">
-  <strong>Cyber Avengers — Learn. Investigate. Defend.</strong><br>
+  <strong>Cyber Avengers — Learn. Solve. Level Up.</strong><br>
   Built by Narasimha Rao Nellore and Anudeep Yellugani.
 </p>
