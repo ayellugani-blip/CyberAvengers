@@ -34,11 +34,15 @@ Take on tricky, math-inspired problems that challenge logical thinking, calculat
 - **Audio-visual atmosphere:** themed visual assets and sound effects help bring the experience to life.
 - **Real-world engagement:** featured at an ITM University tech fest, where **20+ students played the platform**.
 
-## 🏆 A Milestone for Our Team
+## 🏆 HISTORIC MILESTONE — PATENT APPROVED
 
-Cyber Avengers was featured as a gamified experience at the **ITM University tech fest**, with more than **20 students playing and exploring the platform**.
+> **🚨 A FIRST IN ITM UNIVERSITY HISTORY (as reported by our team)**
+>
+> # 🏅 PATENT APPROVAL ACHIEVED
+>
+> **Cyber Avengers is the first platform at ITM University, as shared by our team, to go through the patent process and receive approval.** This is a landmark achievement for our team and a proud moment in the project's journey—from an idea to a platform recognized through the patent process.
 
-A special milestone for our team: **Cyber Avengers became the first platform at ITM University, as shared by our team, to go through the patent process and receive approval.** This recognition represents an important step in our effort to turn a practical learning idea into an original platform.
+Alongside this milestone, Cyber Avengers was featured as a gamified experience at the **ITM University tech fest**, where **20+ students played and explored the platform**.
 
 ## 🧑‍💻 Built By
 
