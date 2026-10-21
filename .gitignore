@@ -8,3 +8,5 @@ debug.txt
 tmp_out.txt
 .DS_Store
 Thumbs.db
+/assets/audio/
+/assets/images/
