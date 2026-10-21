@@ -1,0 +1,9 @@
+node_modules/
+.vscode/
+.stark_data/
+tmp/
+*.zip
+debug.txt
+tmp_out.txt
+.DS_Store
+Thumbs.db

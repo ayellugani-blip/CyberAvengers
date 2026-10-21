@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel Nexus: The Game</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Cinzel:wght@600&family=Share+Tech+Mono&family=Goldman:wght@400;700&family=Zen+Dots&family=Oxanium:wght@400;700;800&family=Audiowide&family=Teko:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/bug-bounty.css">
+    <link rel="stylesheet" href="assets/css/quantum.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <!-- Note: favicon might not exist, but good to have path ready -->
+    <style>
+        /* Global Level Locking System - Vibrant Red Protocol */
+        .level-locked {
+            opacity: 0.6;
+            filter: grayscale(0.8) contrast(1.2);
+            pointer-events: none;
+            position: relative;
+        }
+
+        .secure-access-tag {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            background: linear-gradient(135deg, #ff003c 0%, #990024 100%);
+            color: #fff;
+            padding: 10px 35px;
+            font-family: 'Zen Dots', cursive;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            white-space: nowrap;
+            z-index: 50;
+            border: 2px solid #fff;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.3);
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            text-transform: uppercase;
+        }
+
+        .secure-access-tag::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 4px);
+            pointer-events: none;
+        }
+
+        .level-locked .secure-access-tag {
+            display: block !important;
+            animation: tagPulse 2s infinite ease-in-out;
+        }
+
+        @keyframes tagPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) rotate(-15deg) scale(1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: translate(-50%, -50%) rotate(-15deg) scale(1.05);
+            }
+        }
+
+        /* VICTORY OVERLAY - HIGH-FIDELITY STARK HUD */
+        .victory-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background:
+                radial-gradient(circle at center, rgba(0, 40, 80, 0.4) 0%, rgba(0, 5, 10, 0.98) 100%),
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 100%, 100% 4px, 100% 100%;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(15px);
+            animation: victoryFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        /* Subtle Grid Overlay */
+        .victory-overlay::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .victory-panel {
+            background: rgba(0, 15, 30, 0.9);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 50px 70px;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow:
+                0 0 100px rgba(0, 240, 255, 0.1),
+                inset 0 0 50px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(0, 240, 255, 0.2);
+            max-width: 850px;
+            /* Widened to fix truncation */
+            width: 95%;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.1s ease-out;
+            /* For parallax */
+        }
+
+        /* Modular Framing - Thicker brackets with "Status LEDs" */
+        .victory-panel::before,
+        .victory-panel::after {
+            content: "";
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            border: 4px solid #00f0ff;
+            filter: drop-shadow(0 0 5px #00f0ff);
+        }
+
+        .victory-panel::before {
+            top: -10px;
+            left: -10px;
+            border-right: 0;
+            border-bottom: 0;
+        }
+
+        .victory-panel::after {
+            bottom: -10px;
+            right: -10px;
+            border-left: 0;
+            border-top: 0;
+        }
+
+        /* Status LEDs */
+        .status-led {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #00ffcc;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00ffcc;
+            animation: ledPulse 1.5s infinite;
+        }
+
+        @keyframes ledPulse {
+
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .victory-glitch-text {
+            font-family: 'Zen Dots', cursive;
+            font-size: clamp(1.2rem, 5vw, 2.8rem);
+            /* Decreased font size as requested */
+            color: #fff;
+            text-shadow: 3px 0 #ff003c, -3px 0 #00f0ff;
+            margin-bottom: 5px;
+            letter-spacing: 3px;
+            /* Slightly reduced letter spacing */
+            white-space: nowrap;
+            animation: victoryGlitchAnim 3s infinite linear alternate-reverse;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Detailed Notched Dividers */
+        .hud-divider {
+            height: 2px;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(0, 240, 255, 0.5) 20%,
+                    #00f0ff 50%,
+                    rgba(0, 240, 255, 0.5) 80%,
+                    transparent);
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .hud-divider::after {
+            content: "";
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 10px;
+            background: #00f0ff;
+            clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
+        }
+
+        .victory-stats {
+            margin: 30px 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .stat-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+            color: #888;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .stat-value {
+            font-family: 'Zen Dots', cursive;
+            font-size: 1.5rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        /* Segmented Progress bar */
+        .redirect-container {
+            margin: 40px 0;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .segmented-progress {
+            height: 12px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .progress-fill-segmented {
+            height: 100%;
+            background:
+                repeating-linear-gradient(90deg,
+                    #00f0ff 0%, #00f0ff 80%,
+                    transparent 81%, transparent 100%);
+            background-size: 10px 100%;
+            width: 100%;
+            transition: width 5s linear;
+            filter: drop-shadow(0 0 8px #00f0ff);
+        }
+
+        /* Micro-data Hex display */
+        .hex-data-stream {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.65rem;
+            color: #00f0ff;
+            opacity: 0.6;
+            margin-top: 10px;
+            letter-spacing: 1px;
+            height: 1.2em;
+            overflow: hidden;
+        }
+
+        .victory-btn {
+            background: linear-gradient(135deg, #00f0ff 0%, #0088ff 100%);
+            color: #000;
+            border: none;
+            padding: 18px 60px;
+            font-family: 'Zen Dots', cursive;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.6));
+        }
+
+        .victory-btn:hover {
+            transform: scale(1.1) skewX(-5deg);
+            box-shadow: 0 0 50px rgba(0, 240, 255, 0.8);
+            filter: brightness(1.2);
+        }
+
+        /* NEXT LEVEL SCANNING ANIMATION */
+        .newly-unlocked-btn {
+            position: relative;
+            animation: guidePulseAnim 2s infinite ease-in-out !important;
+            border: 2px solid #00f0ff !important;
+            overflow: hidden;
+            background: rgba(0, 240, 255, 0.15) !important;
+            color: #fff !important;
+        }
+
+        .newly-unlocked-btn::before {
+            content: "";
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: conic-gradient(from 0deg, transparent, rgba(0, 240, 255, 0.4), transparent 40%);
+            animation: btnRotateScan 3s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes btnRotateScan {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .newly-unlocked-btn::after {
+            content: "SYSTEM_READY_ENGAGE";
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffaa00;
+            color: #000;
+            font-size: 9px;
+            padding: 3px 10px;
+            white-space: nowrap;
+            font-family: 'Share Tech Mono', monospace;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
+            animation: bounceInSubtle 1s ease-out;
+        }
+
+        @keyframes bounceInSubtle {
+            0% {
+                transform: translate(-50%, 10px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Premium HUD Libraries -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <meta name="description" content="Epic Marvel-themed game boot screen and access interface">
+
+    <!-- Firebase SDKs (Compat Version for ease of migration) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase/firebase-init.js"></script>
+
+</head>
+
+<body>
+    <!-- Tactical HUD Overlays -->
+    <div id="particles-js"></div>
+    <div class="hud-scanlines"></div>
+
+    <div class="ambient-background"></div>
+    <div class="interface-layer">
+        <div class="hub-background-layer">
+            <div class="scanline-overlay"></div>
+        </div>
+        <div class="vignette"></div>
+        <div class="grid-overlay"></div>
+        <div class="scanline"></div>
+        <div class="corner-gauge top-left">
+            <div class="radar-circle"></div>
+        </div>
+        <div class="corner-gauge top-right">
+            <div class="signal-bars">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <div class="gauge-label">SIGNAL: ENCRYPTED</div>
+        </div>
+        <div class="corner-gauge bottom-left">
+            <div class="energy-meter">
+                <div id="global-reactor-fill" class="energy-fill"></div>
+            </div>
+            <div class="gauge-label" id="global-reactor-label">ARC REACTOR: 98%</div>
+        </div>
+        <div class="corner-gauge bottom-right">
+            <div class="scrolling-code" id="global-system-status">Activating JARVIS...</div>
+        </div>
+    </div>
+    <div class="particles" id="particles"></div>
+
+    <!-- Boot Screen -->
+    <section id="boot-screen" class="screen active">
+        <!-- New wireframe Arc Reactor background -->
+        <div class="boot-arc-reactor-bg wireframe-pulse" id="boot-arc-reactor-bg">
+            <svg viewBox="0 0 500 500" class="reactor-svg">
+                <circle cx="250" cy="250" r="200" fill="none" stroke="rgba(0, 240, 255, 0.2)" stroke-width="1"
+                    stroke-dasharray="5,5" />
+                <circle cx="250" cy="250" r="150" fill="none" stroke="rgba(0, 240, 255, 0.3)" stroke-width="2" />
+                <circle cx="250" cy="250" r="80" fill="none" stroke="rgba(0, 240, 255, 0.4)" stroke-width="1"
+                    stroke-dasharray="10,10" />
+                <line x1="250" y1="50" x2="250" y2="450" stroke="rgba(0, 240, 255, 0.1)" stroke-width="1" />
+                <line x1="50" y1="250" x2="450" y2="250" stroke="rgba(0, 240, 255, 0.1)" stroke-width="1" />
+                <path d="M 250 100 L 400 250 L 250 400 L 100 250 Z" fill="none" stroke="rgba(0, 240, 255, 0.2)"
+                    stroke-width="1" />
+            </svg>
+        </div>
+        <!-- Holographic HUD Overlay -->
+        <div class="boot-hud-overlay">
+            <div class="hud-circle-scanner"></div>
+        </div>
+
+        <div class="boot-container">
+            <div class="logo-wrapper-premium">
+                <!-- Atmospheric elements -->
+                <div class="logo-sparks-container" id="logo-sparks"></div>
+
+                <div class="cyber-avengers-logo-cinematic">
+                    <div class="logo-line cyber">
+                        <span class="char" data-text="C">C</span>
+                        <span class="char" data-text="Y">Y</span>
+                        <span class="char" data-text="B">B</span>
+                        <span class="char" data-text="E">E</span>
+                        <span class="char" data-text="R">R</span>
+                    </div>
+                    <div class="logo-line avengers">
+                        <div class="char insignia-a-wrap">
+                            <svg viewBox="0 0 490 100" class="insignia-svg"
+                                style="width: auto; height: 1.1em; overflow: visible; display: block; margin: 0 auto;">
+                                <defs>
+                                    <linearGradient id="metal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                                        <stop offset="20%" style="stop-color:#b0b0b0;stop-opacity:1" />
+                                        <stop offset="21%" style="stop-color:#020617;stop-opacity:1" />
+                                        <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.8" />
+                                        <stop offset="51%" style="stop-color:#303030;stop-opacity:1" />
+                                        <stop offset="75%" style="stop-color:#1e1e1e;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#020617;stop-opacity:1" />
+                                    </linearGradient>
+                                    <filter id="crystalline-texture">
+                                        <feSpecularLighting surfaceScale="5" specularConstant="1" specularExponent="40"
+                                            lighting-color="#ffffff">
+                                            <feDistantLight azimuth="45" elevation="45" />
+                                        </feSpecularLighting>
+                                        <feComposite in="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="1"
+                                            k4="0" />
+                                    </filter>
+                                    <filter id="glow-premium" x="-50%" y="-50%" width="200%" height="200%">
+                                        <feGaussianBlur stdDeviation="3" result="blur" />
+                                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                    </filter>
+                                </defs>
+
+                                <path d="M 50,15 
+                                         L 20,85 
+                                         L 35,85 
+                                         L 40,70 
+                                         L 60,70 
+                                         L 65,85 
+                                         L 80,85 
+                                         L 50,15 Z" fill="url(#metal-grad)" class="forged-path"
+                                    filter="url(#crystalline-texture)" />
+                                <path d="M 43,62 L 57,62 L 50,30 Z" fill="#020617" opacity="0.8" />
+                                <!-- Negative space triangle -->
+
+                                <text x="90" y="85" font-family="'Orbitron', sans-serif" font-weight="800"
+                                    font-size="82" letter-spacing="-3" filter="url(#crystalline-texture)"
+                                    class="forged-path">
+                                    <tspan fill="url(#metal-grad)">V</tspan>
+                                    <tspan fill="url(#metal-grad)">E</tspan>
+                                    <tspan fill="url(#metal-grad)">N</tspan>
+                                    <tspan fill="url(#metal-grad)">G</tspan>
+                                    <tspan fill="url(#metal-grad)">E</tspan>
+                                    <tspan fill="url(#metal-grad)">R</tspan>
+                                    <tspan fill="url(#metal-grad)">S</tspan>
+                                </text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="logo-underline-premium"></div>
+            </div>
+
+            <div class="loading-console-premium">
+                <div class="loading-stats">
+                    <div class="loading-items" id="loading-items">INITIALIZING_SYSTEMS...</div>
+                    <div class="loading-percentage" id="loading-percentage">0%</div>
+                </div>
+                <div class="loading-bar-container-premium">
+                    <div class="loading-bar-glow"></div>
+                    <div class="loading-bar" id="loading-bar"></div>
+                </div>
+                <div class="console-logs-premium" id="console-logs"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auth Screen -->
+    <section id="auth-screen" class="screen hidden">
+        <div class="auth-split-wrapper drop-shadow">
+            <div class="auth-left" style="background-image: url('assets/images/hero_im_bg.png');">
+                <div class="auth-left-content">
+                    <div class="hero-overlay-text">STARK INDUSTRIES</div>
+                </div>
+            </div>
+            <div class="auth-right">
+                <h2 class="welcome-heading">MAINFRAME ACCESS<br>STARK PROTOCOL</h2>
+
+                <div id="auth-form" class="valorant-form">
+                    <!-- Step 1: Credentials -->
+                    <div id="auth-step-1" class="auth-step">
+                        <div class="input-group">
+                            <label>EMAIL</label>
+                            <input type="email" id="auth-email" required placeholder="agent@stark.com">
+                        </div>
+                        <div class="input-group">
+                            <label>ALIAS</label>
+                            <input type="text" id="username" required placeholder="Enter Alias">
+                        </div>
+                        <div class="input-group">
+                            <label>ACCESS CODE</label>
+                            <input type="password" id="auth-code" required placeholder="Enter Secure Access Code"
+                                minlength="6">
+                        </div>
+                        <div class="action-row" style="display: flex; gap: 10px;">
+                            <button type="button" id="btn-register" class="auth-submit val-btn">REGISTER</button>
+                            <button type="button" id="btn-login" class="auth-submit val-btn">LOGIN</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Character Selection -->
+                    <div id="auth-step-2" class="auth-step hidden">
+                        <div class="avatar-selection" id="avatar-selection-wrapper">
+                            <label>SELECT AI PROTOCOL (AVATAR)</label>
+                            <div class="avatar-grid" id="avatar-grid">
+                                <!-- Avatars populated dynamically -->
+                            </div>
+                            <input type="hidden" id="selected-avatar">
+                        </div>
+                        <div class="action-row">
+                            <button type="button" id="engage-systems-btn" class="auth-submit val-btn">ENGAGE
+                                SYSTEMS</button>
+                        </div>
+                    </div>
+
+                    <div class="auth-footer">
+                        Require clearance? <span>Request Access</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Menu Screen (Mode Selection) -->
+    <section id="menu-screen" class="screen hidden">
+        <div class="top-bar">
+            <!-- Left: Strategic Title -->
+            <div class="nav-left">
+                <div class="rogue-title">AVENGERS COMMAND</div>
+                <div class="deployment-sub">STRATEGIC INTERFACE // v2.04</div>
+            </div>
+
+            <!-- Center: Hero Profile -->
+            <div class="user-profile">
+                <div class="user-avatar" id="display-user-avatar"></div>
+                <div class="user-info">
+                    <div class="welcome-text">LOGGED IN AS:</div>
+                    <div class="username-display" id="display-username">AGENT</div>
+                    <div class="protocol-id" id="active-protocol">PROTOCOL: JARVIS</div>
+                </div>
+            </div>
+
+            <!-- Right: System Controls -->
+            <div class="nav-right">
+                <button class="about-nav-btn" id="about-nav-btn">ABOUT</button>
+                <div class="system-status">
+                    <span class="status-label">SYS_STATUS:</span>
+                    <span class="status-online pulse-online">ONLINE</span>
+                </div>
+                <button class="logout-btn" id="logout-btn">LOGOUT</button>
+            </div>
+        </div>
+
+        <div class="menu-content">
+            <div class="exclusive-info-box">
+                <div class="exclusive-header">
+                    <span class="exclusive-label">EXCLUSIVE ACCESS</span>
+                    <div class="exclusive-line"></div>
+                </div>
+                <div class="exclusive-title typewriter">EXCLUSIVE BY CYBER SHIELD HUB</div>
+                <div class="exclusive-dev-list">
+                    <div class="dev-item">
+                        <span class="dev-bracket">[</span>
+                        <span class="dev-name">N. NARASIMHA RAO</span>
+                        <span class="dev-bracket">]</span>
+                    </div>
+                    <div class="dev-item">
+                        <span class="dev-bracket">[</span>
+                        <span class="dev-name">ANUDEEP. Y</span>
+                        <span class="dev-bracket">]</span>
+                    </div>
+                    <div class="dev-item">
+                        <span class="dev-bracket">[</span>
+                        <span class="dev-name">DHRUV SARIN</span>
+                        <span class="dev-bracket">]</span>
+                    </div>
+                </div>
+                <div class="exclusive-footer">
+                    <span class="footer-code">CSH_DEV_PROT_V4.0</span>
+                </div>
+            </div>
+
+            <div class="mode-selection">
+                <div class="mode-card holographic-file" data-mode="single">
+                    <div class="card-brackets"></div>
+                    <div class="mode-bg single-bg">
+                    </div>
+                    <div class="mode-content">
+                        <h3>Lone Wolf Mode</h3>
+                        <p>Engage in classified solo operations across the multiverse.</p>
+                        <span class="mode-status">CLASSIFIED</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Game Loading Screen -->
+    <section id="game-loading-screen" class="screen hidden">
+        <div class="boot-container">
+            <h1 class="glitch-text" data-text="ENTERING MULTIVERSE...">ENTERING MULTIVERSE...</h1>
+            <div id="mission-briefing" class="typewriter-text">Preparing Mission Assets...</div>
+            <div class="spinner"></div>
+        </div>
+    </section>
+
+    <!-- Cutscene Screen -->
+    <section id="cutscene-screen" class="screen hidden">
+        <div id="ultron-face-container" class="ultron-face-container">
+            <!-- Menacing Ultron Reveal SVG -->
+            <svg width="1000" height="800" viewBox="0 0 1000 800" id="ultron-svg" class="ultron-svg">
+                <defs>
+                    <filter id="ultronGlow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="25" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                    <filter id="darkShadow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="20" stdDeviation="30" floodColor="#000" floodOpacity="0.9" />
+                    </filter>
+                    <linearGradient id="metalGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                        <stop offset="0%" stop-color="#1a1a24" />
+                        <stop offset="40%" stop-color="#0d0d14" />
+                        <stop offset="100%" stop-color="#000000" />
+                    </linearGradient>
+                    <linearGradient id="cheekGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#000000" />
+                        <stop offset="50%" stop-color="#15151e" />
+                        <stop offset="100%" stop-color="#000000" />
+                    </linearGradient>
+                </defs>
+
+                <g filter="url(#darkShadow)" class="ultron-silhouette">
+                    <path
+                        d="M 300 200 C 300 50, 700 50, 700 200 L 750 400 L 650 600 L 550 650 L 450 650 L 350 600 L 250 400 Z"
+                        fill="url(#metalGrad)" />
+                    <path d="M 400 150 L 600 150 L 550 220 L 450 220 Z" fill="#111118" stroke="#222230"
+                        stroke-width="2" />
+                    <path d="M 480 100 L 520 100 L 510 150 L 490 150 Z" fill="#0a0a0f" />
+                    <path d="M 250 400 L 400 480 L 350 600 Z" fill="#050508" />
+                    <path d="M 750 400 L 600 480 L 650 600 Z" fill="#050508" />
+                    <path d="M 400 480 L 600 480 L 550 650 L 450 650 Z" fill="url(#cheekGrad)" stroke="#1a1a24"
+                        stroke-width="3" />
+                    <path d="M 430 520 L 570 520 M 440 550 L 560 550 M 450 580 L 550 580" stroke="#050508"
+                        stroke-width="6" stroke-linecap="round" />
+                    <path d="M 350 600 L 450 650 L 550 650 L 650 600 L 700 800 L 300 800 Z" fill="#08080c" />
+                </g>
+
+                <g filter="url(#ultronGlow)" class="ultron-eyes">
+                    <path id="eye-l" class="eye-path" d="M 320 300 L 460 340 L 430 370 L 350 340 Z" fill="#ffaa00" />
+                    <path id="eye-r" class="eye-path" d="M 680 300 L 540 340 L 570 370 L 650 340 Z" fill="#ffaa00" />
+                    <path id="eye-l-inner" class="eye-inner-path" d="M 360 320 L 440 345 L 420 355 L 380 335 Z"
+                        fill="#ffffcc" />
+                    <path id="eye-r-inner" class="eye-inner-path" d="M 640 320 L 560 345 L 580 355 L 620 335 Z"
+                        fill="#ffffcc" />
+                    <path d="M 450 535 L 550 535 L 540 565 L 460 565 Z" fill="#ffaa00" opacity="0.15" />
+                </g>
+            </svg>
+        </div>
+
+        <div class="cutscene-hud">
+            <div class="hud-stat top-left">
+                <span class="hud-label">SYS.CORE.STATUS</span>
+                <span class="hud-value" id="hud-core-status">OFFLINE</span>
+
+                <!-- Exclusive Info Box in Cutscene -->
+                <div class="exclusive-info-box cutscene-exclusive">
+                    <div class="exclusive-header">
+                        <span class="exclusive-label">EXCLUSIVE ACCESS</span>
+                        <div class="exclusive-line"></div>
+                    </div>
+                    <div class="exclusive-title typewriter">EXCLUSIVE BY CYBER SHIELD HUB</div>
+                    <div class="exclusive-dev-list">
+                        <div class="dev-item">
+                            <span class="dev-bracket">[</span>
+                            <span class="dev-name">N. NARASIMHA RAO</span>
+                            <span class="dev-bracket">]</span>
+                        </div>
+                        <div class="dev-item">
+                            <span class="dev-bracket">[</span>
+                            <span class="dev-name">ANUDEEP. Y</span>
+                            <span class="dev-bracket">]</span>
+                        </div>
+                        <div class="dev-item">
+                            <span class="dev-bracket">[</span>
+                            <span class="dev-name">DHRUV SARIN</span>
+                            <span class="dev-bracket">]</span>
+                        </div>
+                    </div>
+                    <div class="exclusive-footer">
+                        <span class="footer-code">CSH_DEV_PROT_V4.0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hud-stat top-right">
+                <span class="hud-label">OUTPUT.YIELD</span>
+                <span class="hud-value" id="hud-output-yield">0.0%</span>
+
+                <!-- Premium Tactical Skip Module (Hold to Override) -->
+                <div class="tactical-skip-container">
+                    <button id="cutscene-skip-btn" class="tactical-skip-btn">
+                        <div class="skip-btn-content">
+                            <div class="skip-header">
+                                <span class="skip-id">OP_BYPASS_001</span>
+                                <div class="skip-status-pulse"></div>
+                                <span class="skip-sec">SEC_LVL: BLUE</span>
+                            </div>
+                            <div class="skip-main">
+                                <div class="hold-progress-container">
+                                    <svg class="progress-ring" width="40" height="40" viewBox="0 0 40 40">
+                                        <circle class="progress-ring__circle-bg" stroke="rgba(0, 240, 255, 0.1)"
+                                            stroke-width="2.5" fill="transparent" r="15.9" cx="20" cy="20" />
+                                        <circle id="skip-progress-bar" class="progress-ring__circle"
+                                            stroke="rgba(0, 240, 255, 1)" stroke-width="2.5" stroke-dasharray="100"
+                                            stroke-dashoffset="100" fill="transparent" r="15.9" cx="20" cy="20" />
+                                    </svg>
+                                    <span class="skip-icon">>></span>
+                                </div>
+                                <div class="skip-msg-area">
+                                    <span class="skip-text-vibrant" data-text="HOLD TO SKIP INTRO">HOLD TO SKIP
+                                        INTRO</span>
+                                    <div class="skip-text-sub">ENCRYPTED_SIGNAL_BYPASS</div>
+                                </div>
+                            </div>
+                            <div class="skip-footer">
+                                <span class="skip-hint">INITIATE_OVERRIDE_SEQUENCE</span>
+                            </div>
+                        </div>
+                        <!-- Tactical Ornaments -->
+                        <div class="skip-frame">
+                            <div class="frame-edge tl"></div>
+                            <div class="frame-edge tr"></div>
+                            <div class="frame-edge bl"></div>
+                            <div class="frame-edge br"></div>
+                            <div class="frame-decor-line"></div>
+                        </div>
+                        <div class="skip-scanline"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="arc-reactor-wrapper">
+            <!-- Asset SVG Reactor -->
+            <div id="reactor-svg-container" class="reactor-svg-container">
+                <svg viewBox="0 0 500 500" class="reactor-svg" id="arc-reactor-svg">
+                    <defs>
+                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="8" result="blur" />
+                            <feMerge>
+                                <feMergeNode in="blur" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                        <filter id="glow-intense" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="15" result="blur" />
+                            <feMerge>
+                                <feMergeNode in="blur" />
+                                <feMergeNode in="blur" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                        <radialGradient id="coreGradient" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" class="stop-core" />
+                            <stop offset="40%" class="stop-primary" />
+                            <stop offset="100%" class="stop-secondary" stop-opacity="0" />
+                        </radialGradient>
+                    </defs>
+
+                    <!-- Ambient Background Glow -->
+                    <circle id="ambient-glow" cx="250" cy="250" r="200" fill="url(#coreGradient)" opacity="0.2" />
+
+                    <!-- Outer Thin Track -->
+                    <g class="rotating-ring" id="ring-outer-track">
+                        <circle cx="250" cy="250" r="235" fill="none" class="ring-stroke-primary" stroke-width="2"
+                            stroke-dasharray="4 8" opacity="0.6" />
+                    </g>
+
+                    <!-- Outer Thick Segmented Ring -->
+                    <g class="rotating-ring-rev" id="ring-outer-thick">
+                        <circle cx="250" cy="250" r="210" fill="none" class="ring-stroke-primary-thick"
+                            stroke-width="30" stroke-dasharray="150 40 300 80 50 50" opacity="0.4" />
+                        <circle cx="250" cy="250" r="210" fill="none" class="ring-stroke-core" stroke-width="2"
+                            stroke-dasharray="150 40 300 80 50 50" opacity="0.8" />
+                    </g>
+
+                    <!-- Mid Translucent Broad Ring -->
+                    <g class="rotating-ring" id="ring-mid-broad">
+                        <circle cx="250" cy="250" r="170" fill="none" class="ring-stroke-secondary" stroke-width="40"
+                            stroke-dasharray="400 100 50 100" opacity="0.3" />
+                    </g>
+
+                    <!-- Mid Solid Segments -->
+                    <g class="rotating-ring-rev" id="ring-mid-solid">
+                        <circle cx="250" cy="250" r="140" fill="none" class="ring-stroke-primary" stroke-width="15"
+                            stroke-dasharray="100 20 50 20 200 50" filter="url(#glow)" />
+                    </g>
+
+                    <!-- Inner Fine Ticks -->
+                    <g class="rotating-ring" id="ring-inner-ticks">
+                        <circle cx="250" cy="250" r="110" fill="none" class="ring-stroke-primary" stroke-width="8"
+                            stroke-dasharray="2 6" opacity="0.8" />
+                    </g>
+
+                    <!-- Inner Solid Ring with Gaps & Crosshairs -->
+                    <g class="rotating-ring-rev" id="ring-inner-crosshair">
+                        <circle cx="250" cy="250" r="90" fill="none" class="ring-stroke-core" stroke-width="2"
+                            stroke-dasharray="120 20 120 20 120 20" filter="url(#glow)" />
+                        <line x1="250" y1="150" x2="250" y2="170" class="line-stroke-core" stroke-width="3" />
+                        <line x1="250" y1="330" x2="250" y2="350" class="line-stroke-core" stroke-width="3" />
+                        <line x1="150" y1="250" x2="170" y2="250" class="line-stroke-core" stroke-width="3" />
+                        <line x1="330" y1="250" x2="350" y2="250" class="line-stroke-core" stroke-width="3" />
+                    </g>
+
+                    <!-- The Core -->
+                    <circle id="core-outer" cx="250" cy="250" r="50" class="core-fill-white"
+                        filter="url(#glow-intense)" />
+                    <circle id="core-inner" cx="250" cy="250" r="30" fill="#ffffff" filter="url(#glow)" />
+                </svg>
+            </div>
+            <div class="reactor-status-label" id="reactor-status-label">SYS_READY // CORE: STABLE</div>
+            <div id="emergency-alert-center" class="emergency-alert-center hidden">
+                <div class="alert-symbol">⚠</div>
+                <div class="alert-text">EMERGENCY ALERT</div>
+                <div class="alert-subtext">CONTAINMENT FAILURE IMMINENT</div>
+            </div>
+        </div>
+
+        <div class="subtitle-container" id="cutscene-subtitles">
+            <div class="subtitle-text" id="subtitle-text"></div>
+        </div>
+
+        <div class="alert-overlay hidden" id="alert-overlay">
+            <div class="alert-glitch"></div>
+        </div>
+
+    </section>
+
+    <!-- Games Screen -->
+    <section id="games-screen" class="screen hidden">
+        <div class="arc-reactor-bg"></div>
+        <div class="grid-lines"></div>
+        <div class="emergency-tint-overlay"></div>
+
+        <!-- Energy Grid Background -->
+        <div class="hub-background-layer">
+            <canvas id="energy-grid-canvas" class="cyber-canvas"></canvas>
+        </div>
+
+        <div class="games-container">
+            <div class="emergency-hub-header">
+                <div class="warning-line system-breach-banner">
+                    <div class="breach-top">
+                        <span class="warning-icon">▲</span>
+                        <span class="breach-text">SYSTEM BREACH DETECTED // EMERGENCY DEFENSE PROTOCOL ACTIVE</span>
+                        <span class="warning-icon">▲</span>
+                    </div>
+                </div>
+                <h2 class="hub-title">CyberShield Hub</h2>
+                <div class="breach-bottom">
+                    <span class="op-status">SELECT STRATEGIC OPERATION // </span>
+                    <span class="core-stability">TENTATIVE CORE STABILITY: <span
+                            class="core-stability-value">42.82</span>%</span>
+                </div>
+            </div>
+
+            <div class="cosmic-particles" id="cosmic-particles"></div>
+            <div class="games-grid">
+                <!-- Cryptography Mission -->
+                <div class="game-card mission-cyan">
+                    <div class="card-corner tl"></div>
+                    <div class="card-corner tr"></div>
+                    <div class="card-corner bl"></div>
+                    <div class="card-corner br"></div>
+                    <div class="game-img"
+                        style="background-image: url('assets/images/Marvel Vision illustration HD wallpaper.jpeg');">
+                        <div class="img-scanline"></div>
+                    </div>
+                    <div class="game-info">
+                        <h3>CRYPTOGRAPHY</h3>
+                        <p>Decode encrypted communications</p>
+                        <button class="play-btn">INITIALIZE</button>
+                    </div>
+                </div>
+
+                <!-- Bug Bounty Mission -->
+                <div class="game-card mission-red">
+                    <div class="card-corner tl"></div>
+                    <div class="card-corner tr"></div>
+                    <div class="card-corner bl"></div>
+                    <div class="card-corner br"></div>
+                    <div class="game-img"
+                        style="background-image: url('https://www.pngall.com/wp-content/uploads/3/Guardians-of-The-Galaxy-Rocket-Raccoon-PNG-Free-Download.png');">
+                        <div class="img-scanline"></div>
+                    </div>
+                    <div class="game-info">
+                        <h3>BUG BOUNTY</h3>
+                        <p>Infiltrate vulnerabilities with Rocket's expertise</p>
+                        <button class="play-btn">INITIALIZE</button>
+                    </div>
+                </div>
+
+                <!-- Quantum Calculations Mission -->
+                <div class="game-card mission-yellow">
+                    <div class="card-corner tl"></div>
+                    <div class="card-corner tr"></div>
+                    <div class="card-corner bl"></div>
+                    <div class="card-corner br"></div>
+                    <div class="game-img"
+                        style="background-image: url('assets/images/wallpapersden.com_official-spider-man-no-way-home_2152x3000.jpg'); background-position: center 80%;">
+                        <div class="img-scanline"></div>
+                    </div>
+                    <div class="game-info">
+                        <h3>QUANTUM CALCULATIONS</h3>
+                        <p>Solve high-frequency equations with Spider-Man</p>
+                        <button class="play-btn">INITIALIZE</button>
+                    </div>
+                </div>
+            </div>
+            <button class="back-btn" id="back-to-menu-from-games">RETURN TO COMMAND</button>
+        </div>
+    </section>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Cryptography Level Selection Screen -->
+    <section id="crypto-level-selection-screen" class="screen hidden">
+        <div class="arc-reactor-bg"></div>
+        <!-- Energy Grid Background -->
+        <div class="hub-background-layer">
+            <canvas id="nexus-grid-canvas" class="cyber-canvas"></canvas>
+        </div>
+
+        <div class="games-container"
+            style="width: 100%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 2;">
+            <div class="emergency-hub-header">
+                <div class="system-breach-banner">
+                    <div class="breach-top">
+                        <span class="warning-icon">▲</span>
+                        <span class="breach-text">SYSTEM BREACH DETECTED // EMERGENCY DEFENSE PROTOCOL ACTIVE</span>
+                        <span class="warning-icon">▲</span>
+                    </div>
+                    <h2 class="hub-title" style="font-size: 3.5rem;">NEXUS MISSION HUB</h2>
+                    <div class="breach-bottom">
+                        <span class="op-status">SELECT STRATEGIC OPERATION // </span>
+                        <span class="core-stability">TENTATIVE CORE STABILITY: <span
+                                class="core-stability-value">42.82</span>%</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="back-btn" id="back-to-hub"
+                style="position: absolute; top: 0; right: 0; padding: 10px 20px; font-size: 0.9rem; z-index: 10;">RETURN
+                TO HUB</button>
+
+            <div class="games-grid" style="margin-top: 40px; width: 100%; max-width: 1000px;">
+                <!-- INITIATE (EASY) -->
+                <div id="crypto-initiate-card" class="game-card mission-cyan"
+                    style="overflow: hidden !important; position: relative;">
+                    <div class="card-corner tl"></div>
+                    <div class="card-corner tr"></div>
+                    <div class="card-corner bl"></div>
+                    <div class="card-corner br"></div>
+                    <div class="game-img level-hero-display">
+                        <div class="level-hero-content">
+                            <div class="level-hero-title">INITIATE</div>
+                            <div class="level-hero-subtitle">SIGNAL_SCAN_ACTIVE</div>
+                        </div>
+                    </div>
+                    <div class="game-info" style="align-items: center; text-align: center;">
+                        <h3 class="mission-tag-label" style="margin-bottom: 5px; font-size: 1.4rem;">BASIC_DECRYPTION
+                        </h3>
+                        <p style="margin-bottom: 15px; font-size: 0.85rem; color: #00ffcc;">LOW DIFFICULTY</p>
+                        <p
+                            style="font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; line-height: 1.6; margin-bottom: 20px;">
+                            2 MISSIONS TO UNLOCK<br>
+                            90 SECONDS TIME LIMIT<br>
+                            2 LIVES AVAILABLE
+                        </p>
+                        <button id="crypto-initiate-btn" class="play-btn crypto-start-btn" data-diff="initiate"
+                            style="width: 100%;">⚡ ENGAGE ⚡</button>
+                    </div>
+                    <div class="secure-access-tag">🔒 SECURE ACCESS REQUIRED</div>
+                </div>
+
+                <!-- OPERATIVE (MODERATE) -->
+                <div id="crypto-operative-card" class="game-card mission-yellow"
+                    style="overflow: hidden !important; position: relative;">
+                    <div class="card-corner tl"></div>
+                    <div class="card-corner tr"></div>
+                    <div class="card-corner bl"></div>
+                    <div class="card-corner br"></div>
+                    <div class="game-img level-hero-display">
+                        <div class="level-hero-content">
+                            <div class="level-hero-title">OPERATIVE</div>
+                            <div class="level-hero-subtitle">DATA_BREACH_SYNC</div>
+                        </div>
+                    </div>
+                    <div class="game-info" style="align-items: center; text-align: center;">
+                        <h3 class="mission-tag-label" style="margin-bottom: 5px; font-size: 1.4rem;">TACTICAL_CIPHER
+                        </h3>
+                        <p style="margin-bottom: 15px; font-size: 0.85rem; color: #ffaa00;">STANDARD DIFFICULTY</p>
+                        <p
+                            style="font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; line-height: 1.6; margin-bottom: 20px;">
+                            2 MISSIONS TO UNLOCK<br>
+                            60 SECONDS TIME LIMIT<br>
+                            1 LIFE AVAILABLE
+                        </p>
+                        <button id="crypto-operative-btn" class="play-btn crypto-start-btn" data-diff="operative"
+                            style="width: 100%;">⚡ ENGAGE ⚡</button>
+                    </div>
+                    <div class="secure-access-tag">🔒 SECURE ACCESS REQUIRED</div>
+                </div>
+
+                <!-- OMEGA (ADVANCED) -->
+                <div id="crypto-omega-card" class="game-card mission-red"
+                    style="overflow: hidden !important; position: relative;">
+                    <div class="card-corner tl"></div>
+                    <div class="card-corner tr"></div>
+                    <div class="card-corner bl"></div>
+                    <div class="card-corner br"></div>
+                    <div class="game-img level-hero-display">
+                        <div class="level-hero-content">
+                            <div class="level-hero-title">OMEGA</div>
+                            <div class="level-hero-subtitle">SYSTEM_CRITICAL_EXPOSURE</div>
+                        </div>
+                    </div>
+                    <div class="game-info" style="align-items: center; text-align: center;">
+                        <h3 class="mission-tag-label" style="margin-bottom: 5px; font-size: 1.4rem;">SEC_ACCESS_REQ</h3>
+                        <p style="margin-bottom: 15px; font-size: 0.85rem; color: #ff003c;">EXTREME DIFFICULTY</p>
+                        <p
+                            style="font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; line-height: 1.6; margin-bottom: 20px;">
+                            1 MISSION TO WIN<br>
+                            60 SECONDS TIME LIMIT<br>
+                            1 LIFE ONLY
+                        </p>
+                        <button id="crypto-omega-btn" class="play-btn crypto-start-btn" data-diff="omega"
+                            style="width: 100%;">⚡ ENGAGE ⚡</button>
+                    </div>
+                    <div class="secure-access-tag">🔒 SECURE ACCESS REQUIRED</div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Bug Bounty Level Selection Screen -->
+    <section id="bug-bounty-level-selection-screen" class="screen hidden"
+        style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 80px; overflow-y: auto;">
+        <!-- Energy Grid Background (Explicitly Background) -->
+        <div class="hub-background-layer" style="position: fixed; inset: 0; z-index: 1;">
+            <canvas id="bug-bounty-grid-canvas" class="cyber-canvas"></canvas>
+        </div>
+
+        <div class="games-container"
+            style="width: 100%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 2; padding-bottom: 100px;">
+            <div class="emergency-hub-header">
+                <div class="system-breach-banner">
+                    <div class="breach-top">
+                        <span class="warning-icon">▲</span>
+                        <span class="breach-text">SYSTEM BREACH DETECTED // EMERGENCY DEFENSE PROTOCOL ACTIVE</span>
+                        <span class="warning-icon">▲</span>
+                    </div>
+                    <h2 class="hub-title" style="font-size: 3.5rem;">BUG BOUNTY MISSION HUB</h2>
+                    <div class="breach-bottom">
+                        <span class="op-status">SELECT STRATEGIC OPERATION // </span>
+                        <span class="core-stability">TENTATIVE CORE STABILITY: <span
+                                class="core-stability-value">42.82</span>%</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="back-btn" id="back-to-hub-from-bug"
+                style="position: absolute; top: 0; right: 0; padding: 10px 20px; font-size: 0.9rem; z-index: 10;">RETURN
+                TO HUB</button>
+
+            <div class="level-grid"
+                style="margin-top: 40px; display: flex; gap: 40px; justify-content: center; width: 100%; max-width: 1400px; padding: 20px; flex-wrap: wrap;">
+                <!-- INITIATE (EASY) -->
+                <div id="bug-bounty-initiate-card" class="holographic-file mission-cyan"
+                    style="width: 320px; height: 500px; flex-shrink: 0; display: flex; flex-direction: column;">
+                    <div class="card-header"
+                        style="padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(0, 240, 255, 0.2);">
+                        <h3
+                            style="font-size: 3rem; margin: 0; color: #00f0ff; letter-spacing: 4px; font-weight: 800; text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);">
+                            INITIATE</h3>
+                        <p
+                            style="font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: #00f0ff; margin-top: 10px; opacity: 0.7; letter-spacing: 2px;">
+                            [ SIGNAL_SCAN_ACTIVE ]</p>
+                    </div>
+                    <div class="secure-access-tag">🔒 SECURE ACCESS REQUIRED</div>
+                    <div class="game-info"
+                        style="padding: 25px; flex-grow: 1; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: space-between;">
+                        <div class="mission-specs">
+                            <div class="spec-group" style="margin-bottom: 15px;">
+                                <p style="color: #00f0ff; font-size: 1.1rem; margin-bottom: 5px; letter-spacing: 1px;">
+                                    BASIC_DECRYPTION</p>
+                                <p style="font-size: 0.75rem; color: #00ffcc; opacity: 0.8;">LOW DIFFICULTY</p>
+                            </div>
+                            <ul
+                                style="list-style: none; padding: 0; margin: 0; font-family: 'Share Tech Mono', monospace; font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.7);">
+                                <li>2 MISSIONS TO UNLOCK</li>
+                                <li>90 SECONDS TIME LIMIT</li>
+                                <li>2 LIVES AVAILABLE</li>
+                            </ul>
+                        </div>
+                        <button id="bug-bounty-initiate-btn" class="play-btn bug-bounty-start-btn" data-diff="initiate"
+                            style="width: 100%; height: 50px; font-size: 1rem; letter-spacing: 1px; border: 1px solid #00f0ff; background: rgba(0, 240, 255, 0.1); color: #00f0ff; box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);">⚡
+                            ENGAGE ⚡</button>
+                    </div>
+                </div>
+
+                <!-- OPERATIVE (MODERATE) -->
+                <div id="bug-bounty-operative-card" class="holographic-file mission-yellow level-locked"
+                    style="width: 320px; height: 500px; flex-shrink: 0; display: flex; flex-direction: column; overflow: hidden !important;">
+                    <div class="card-header"
+                        style="padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(255, 170, 0, 0.2);">
+                        <h3
+                            style="font-size: 3rem; margin: 0; color: #ffaa00; letter-spacing: 4px; font-weight: 800; text-shadow: 0 0 15px rgba(255, 170, 0, 0.4);">
+                            OPERATIVE</h3>
+                        <p
+                            style="font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: #ffaa00; margin-top: 10px; opacity: 0.7; letter-spacing: 2px;">
+                            [ DATA_BREACH_SYNC ]</p>
+                    </div>
+                    <div class="secure-access-tag">🔒 SECURE ACCESS REQUIRED</div>
+                    <div class="game-info"
+                        style="padding: 25px; flex-grow: 1; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: space-between;">
+                        <div class="mission-specs">
+                            <div class="spec-group" style="margin-bottom: 15px;">
+                                <p class="mission-tag-label"
+                                    style="color: #ffaa00; font-size: 1.1rem; margin-bottom: 5px; letter-spacing: 1px;">
+                                    SEC_ACCESS_REQ</p>
+                                <p style="font-size: 0.75rem; color: #ffaa00; opacity: 0.8;">STANDARD DIFFICULTY</p>
+                            </div>
+                            <ul
+                                style="list-style: none; padding: 0; margin: 0; font-family: 'Share Tech Mono', monospace; font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.7);">
+                                <li>2 MISSIONS TO UNLOCK</li>
+                                <li>60 SECONDS TIME LIMIT</li>
+                                <li>1 LIFE AVAILABLE</li>
+                            </ul>
+                        </div>
+                        <div class="lock-icon"></div>
+                        <button id="bug-bounty-operative-btn" class="play-btn bug-bounty-start-btn locked-btn" disabled
+                            data-diff="operative"
+                            style="width: 100%; height: 50px; font-size: 1rem; letter-spacing: 1px; border: 1px solid rgba(255, 170, 0, 0.2); background: rgba(0, 0, 0, 0.4); color: rgba(255, 170, 0, 0.4);">🔒
+                            LOCKED</button>
+                    </div>
+                </div>
+
+                <!-- OMEGA (HARD) -->
+                <div id="bug-bounty-omega-card" class="holographic-file mission-red level-locked"
+                    style="width: 320px; height: 500px; flex-shrink: 0; display: flex; flex-direction: column; overflow: hidden !important;">
+                    <div class="card-header"
+                        style="padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(255, 0, 60, 0.2);">
+                        <h3
+                            style="font-size: 3rem; margin: 0; color: #ff003c; letter-spacing: 4px; font-weight: 800; text-shadow: 0 0 15px rgba(255, 0, 60, 0.4);">
+                            OMEGA</h3>
+                        <p
+                            style="font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: #ff003c; margin-top: 10px; opacity: 0.7; letter-spacing: 2px;">
+                            [ SYSTEM_CRITICAL_EXPOSURE ]</p>
+                    </div>
+                    <div class="secure-access-tag">🔒 SECURE ACCESS REQUIRED</div>
+                    <div class="game-info"
+                        style="padding: 25px; flex-grow: 1; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: space-between;">
+                        <div class="mission-specs">
+                            <div class="spec-group" style="margin-bottom: 15px;">
+                                <p class="mission-tag-label"
+                                    style="color: #ff003c; font-size: 1.1rem; margin-bottom: 5px; letter-spacing: 1px;">
+                                    SEC_ACCESS_REQ</p>
+                                <p style="font-size: 0.75rem; color: #ff003c; opacity: 0.8;">EXTREME DIFFICULTY</p>
+                            </div>
+                            <ul
+                                style="list-style: none; padding: 0; margin: 0; font-family: 'Share Tech Mono', monospace; font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.7);">
+                                <li>1 MISSION TO WIN</li>
+                                <li>45 SECONDS TIME LIMIT</li>
+                                <li>1 LIFE ONLY</li>
+                            </ul>
+                        </div>
+                        <div class="lock-icon"></div>
+                        <button id="bug-bounty-omega-btn" class="play-btn bug-bounty-start-btn locked-btn" disabled
+                            data-diff="omega"
+                            style="width: 100%; height: 50px; font-size: 1rem; letter-spacing: 1px; border: 1px solid rgba(255, 0, 60, 0.2); background: rgba(0, 0, 0, 0.4); color: rgba(255, 0, 60, 0.4);">🔒
+                            LOCKED</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Rules & How to Play Screen -->
+    <section id="rules-screen" class="screen hidden">
+        <div class="arc-reactor-bg"></div>
+        <div class="hub-background-layer">
+            <canvas id="rules-grid-canvas" class="cyber-canvas"></canvas>
+        </div>
+
+        <div class="rules-container">
+            <div class="rules-card">
+                <div class="card-corner tl"></div>
+                <div class="card-corner tr"></div>
+                <div class="card-corner bl"></div>
+                <div class="card-corner br"></div>
+
+                <header class="rules-header">
+                    <div class="rules-mission-type" id="rules-mission-type">NEURAL BREACH PROTOCOL</div>
+                    <h2 class="rules-title" id="rules-title">INITIATE // LEVEL 1</h2>
+                    <div class="rules-difficulty" id="rules-difficulty">LOW COMPLEXITY</div>
+                </header>
+
+                <div class="rules-content">
+                    <div class="rules-section">
+                        <h4><i class="fa-solid fa-crosshairs"></i> MISSION OBJECTIVE</h4>
+                        <p id="rules-objective">Secure the fluctuating encrypted data streams before the system
+                            stabilizes.</p>
+                    </div>
+
+                    <div class="rules-section">
+                        <h4><i class="fa-solid fa-gamepad"></i> HOW TO PLAY</h4>
+                        <ul id="rules-list">
+                            <li>Identify the encryption type in the data stream.</li>
+                            <li>Select the appropriate tool from the decoder dashboard.</li>
+                            <li>Execute the decryption and verify the output.</li>
+                        </ul>
+                    </div>
+
+                    <div class="rules-warnings">
+                        <div class="warning-item">
+                            <span class="warning-icon">⚠</span>
+                            <span id="rules-warning">Multiple failed attempts will trigger a system lockout.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="rules-footer">
+                    <button class="rules-back-btn" id="rules-back-btn">CANCEL MISSION</button>
+                    <button class="rules-start-btn" id="rules-start-btn">
+                        <span class="btn-glitch"></span>
+                        CONFIRM INITIALIZATION
+                    </button>
+                </footer>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cryptography Game Screen -->
+    <section id="crypto-game-screen" class="screen hidden">
+        <div class="crypto-bg-layers">
+            <div class="crypto-layer layer-1"></div>
+            <div class="crypto-layer layer-2"></div>
+            <div class="crypto-layer layer-3" id="crypto-chars"></div>
+            <div class="crypto-layer layer-4"></div>
+        </div>
+
+        <div class="crypto-interface">
+            <header class="crypto-hud">
+                <div class="hud-left">
+                    <div class="nexus-logo-small">MN</div>
+                    <div class="protocol-tag">CRYPTANALYSIS PROTOCOL v1.0</div>
+                </div>
+                <div class="hud-center">
+                    <div class="mission-title" id="crypto-mission-title">MISSION: GHOST TRANSMISSION</div>
+                    <div class="mission-level" id="crypto-level-status">LEVEL 1 // SIGNAL RECRUIT</div>
+                </div>
+                <div class="hud-right">
+                    <div class="timer-wrapper">
+                        <span class="timer-label">TIME_REMAINING:</span>
+                        <span class="timer-value" id="crypto-timer">90.00s</span>
+                    </div>
+                </div>
+            </header>
+
+            <main class="crypto-workspace">
+                <div class="workspace-left">
+                    <div class="panel-label">ENCRYPTED_STREAM</div>
+                    <div class="encrypted-display" id="encrypted-text">
+                        <!-- Cipher text here -->
+                    </div>
+                    <div class="panel-label" style="margin-top: 15px;">CLUES & HINTS</div>
+                    <div class="tool-feedback" id="tool-output-log">
+                        > INITIALIZING SECURE DECRYPTION BUFFER...
+                    </div>
+                </div>
+
+                <div class="workspace-right">
+                    <div class="panel-label">DECRYPTION_INPUT</div>
+                    <textarea class="decrypted-input" id="decrypted-input" placeholder="ENTER DECRYPTED CODE..."
+                        autofocus></textarea>
+
+                    <div class="action-buttons">
+                        <button class="crypto-btn secondary" id="reset-mission">RESET BUFFER</button>
+                        <button class="crypto-btn primary" id="submit-decryption">EXECUTE DECRYPT</button>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="crypto-tools">
+                <div class="tool-label">TACTICAL_HINT_SYSTEM</div>
+                <div class="hint-container"
+                    style="display: flex; justify-content: center; align-items: center; width: 100%; padding: 10px 0;">
+                    <button class="crypto-btn primary" id="use-hint-btn"
+                        style="min-width: 320px; font-size: 1.1rem; padding: 14px 28px; letter-spacing: 2px;">
+                        💡 USE HINT (3 HINTS REMAINING)
+                    </button>
+                </div>
+            </footer>
+        </div>
+
+    </section>
+    <!-- Quantum Level Selection Screen -->
+    <section id="quantum-level-selection-screen" class="screen hidden">
+        <!-- Energy Grid Background -->
+        <div class="hub-background-layer">
+            <canvas id="quantum-grid-canvas" class="cyber-canvas"></canvas>
+        </div>
+
+        <div class="games-container" style="max-width: 1200px; margin: 0 auto;">
+
+            <button class="back-btn" id="back-to-hub-from-quantum"
+                style="position: absolute; top: 30px; right: 30px; padding: 5px 15px; font-size: 0.8rem; z-index: 10; background: rgba(0,0,0,0.5); border: 1px solid #00f2ff; color: #00f2ff; font-family: 'Share Tech Mono', monospace;">RETURN
+                TO HUB</button>
+
+            <div class="games-grid"
+                style="margin-top: 80px; width: 100%; max-width: 1200px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; padding: 0 20px;">
+                <!-- INITIATE -->
+                <div id="quantum-initiate-card" class="quantum-mission-card mission-cyan"
+                    style="overflow: hidden !important; position: relative;">
+                    <div class="quantum-hero-display">
+                        <div class="quantum-hero-title">INITIATE</div>
+                        <div class="quantum-hero-subtitle">SIGNAL_SCAN_ACTIVE</div>
+                    </div>
+                    <div class="quantum-stats-container">
+                        <h3 class="quantum-stats-title mission-tag-label">BASIC_DECRYPTION</h3>
+                        <p class="quantum-difficulty-tag">LOW DIFFICULTY</p>
+                        <div class="quantum-stats-list">
+                            2 QUESTIONS<br>
+                            90 SECONDS TIME LIMIT<br>
+                            2 NEURAL CORES (LIVES)
+                        </div>
+                        <button id="quantum-initiate-btn" class="quantum-engage-btn quantum-start-btn"
+                            data-diff="initiate">
+                            <span>⚡</span> ENGAGE <span>⚡</span>
+                        </button>
+                    </div>
+                    <div class="secure-access-tag">🔒 SECURE ACCESS REQUIRED</div>
+                </div>
+
+                <!-- OPERATIVE -->
+                <div id="quantum-operative-card" class="quantum-mission-card mission-yellow level-locked"
+                    style="overflow: hidden !important; position: relative;">
+                    <div class="quantum-hero-display">
+                        <div class="quantum-hero-title">OPERATIVE</div>
+                        <div class="quantum-hero-subtitle">DATA_BREACH_SYNC</div>
+                    </div>
+                    <div class="quantum-stats-container">
+                        <h3 class="quantum-stats-title mission-tag-label">TACTICAL_CIPHER</h3>
+                        <p class="quantum-difficulty-tag" style="color: #ffaa00;">STANDARD DIFFICULTY</p>
+                        <div class="quantum-stats-list">
+                            2 QUESTIONS<br>
+                            60 SECONDS TIME LIMIT<br>
+                            1 NEURAL CORE (LIFE)
+                        </div>
+                        <div class="lock-icon"></div>
+                        <button id="quantum-operative-btn" class="quantum-engage-btn quantum-start-btn locked-btn"
+                            disabled data-diff="operative"
+                            style="opacity: 0.5; cursor: not-allowed; border-color: rgba(255, 170, 0, 0.2); color: rgba(255, 170, 0, 0.5);">
+                            <span>🔒</span> LOCKED <span>🔒</span>
+                        </button>
+                    </div>
+                    <div class="secure-access-tag">🔒 SECURE ACCESS REQUIRED</div>
+                </div>
+
+                <!-- OMEGA -->
+                <div id="quantum-omega-card" class="quantum-mission-card mission-red"
+                    style="overflow: hidden !important; position: relative;">
+                    <div class="quantum-hero-display">
+                        <div class="quantum-hero-title">OMEGA</div>
+                        <div class="quantum-hero-subtitle">SYSTEM_CRITICAL_EXPOSURE</div>
+                    </div>
+                    <div class="quantum-stats-container">
+                        <h3 class="quantum-stats-title mission-tag-label">SEC_ACCESS_REQ</h3>
+                        <p class="quantum-difficulty-tag" style="color: #ff003c;">EXTREME DIFFICULTY</p>
+                        <div class="quantum-stats-list">
+                            2 QUESTIONS<br>
+                            45 SECONDS TIME LIMIT<br>
+                            1 NEURAL CORE ONLY
+                        </div>
+                        <div class="lock-icon"></div>
+                        <button id="quantum-omega-btn" class="quantum-engage-btn quantum-start-btn" data-diff="omega">
+                            <span>⚡</span> ENGAGE <span>⚡</span>
+                        </button>
+                    </div>
+                    <div class="secure-access-tag">🔒 SECURE ACCESS REQUIRED</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quantum Game Screen (Restructured to match Bug Bounty) -->
+    <section id="quantum-game-screen" class="screen hidden">
+        <canvas id="quantum-grid-canvas-game" class="cyber-canvas"
+            style="position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.3;"></canvas>
+
+        <header class="q-hud-premium">
+            <div class="q-hud-left">
+                <div class="q-hud-logo">QC</div>
+                <div class="q-hud-protocol">QUANTUM_CALCULATION_CORE v1.0 // STARK_INDUSTRIES</div>
+            </div>
+            <div class="q-hud-center">
+                <span class="q-timer-label">COUNTDOWN:</span>
+                <div class="q-timer-value" id="q-timer">000</div>
+            </div>
+            <div class="q-hud-right">
+                <button class="back-btn" id="q-exit-btn"
+                    style="padding: 5px 15px; font-size: 0.8rem; border: 1px solid #ff003c; color: #ff003c;">ABORT_MISSION</button>
+            </div>
+        </header>
+
+        <main class="q-main-workspace">
+            <div class="q-workspace-left">
+                <header class="q-panel-header">
+                    <span class="q-panel-title">QUANTUM_DEEP_SCAN</span>
+                    <div class="q-lang-badge" id="q-diff-label">INITIATE</div>
+                </header>
+                <div class="q-code-container">
+                    <pre><code class="q-code-display" id="q-question-display">
+                        <!-- Questions injected here -->
+                    </code></pre>
+                </div>
+            </div>
+
+            <div class="q-workspace-right">
+                <div class="q-stats-panel">
+                    <div class="q-stat-row">
+                        <span class="q-stat-label">OPERATION_ID:</span>
+                        <span class="q-stat-value" id="q-mission-id">QC_NULL</span>
+                    </div>
+                    <div class="q-stat-row">
+                        <span class="q-stat-label">SYSTEM_STABILITY:</span>
+                        <span class="q-stat-value"><span id="q-stability">100</span>%</span>
+                    </div>
+                    <div class="q-integrity-bar">
+                        <div class="q-integrity-fill" id="q-stability-bar-fill" style="width: 100%;"></div>
+                    </div>
+
+                    <div class="q-stat-row" style="margin-top: 15px;">
+                        <span class="q-stat-label">INTEL_RECOVERED:</span>
+                        <span class="q-stat-value" id="q-progress">0/2</span>
+                    </div>
+                    <div class="q-stat-row">
+                        <span class="q-stat-label">NEURAL_CORES:</span>
+                        <span class="q-stat-value" id="q-lives">2</span>
+                    </div>
+                </div>
+
+                <div class="q-input-panel">
+                    <label class="q-input-label">MISSION_DATA_INPUT:</label>
+                    <input type="text" class="q-user-input" id="q-user-input" placeholder="Enter calculation result..."
+                        autocomplete="off">
+
+                    <div class="q-actions">
+                        <button class="q-btn secondary" id="q-hint-btn">REQUEST_HINT</button>
+                        <button class="q-btn primary" id="q-submit-btn">SUBMIT_PATCH</button>
+                    </div>
+                    <p
+                        style="font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 5px; font-family: 'Share Tech Mono', monospace;">
+                        * Requesting hint reduces time by 15.00s</p>
+                </div>
+            </div>
+        </main>
+
+        <div class="q-feedback-overlay" id="q-feedback">
+            <div class="q-feedback-card">
+                <h2 class="q-feedback-title" id="q-feedback-title">STATUS</h2>
+                <p class="q-feedback-msg" id="q-feedback-msg">SYSTEM NOTIFICATION</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cryptography Modal Overlay -->
+    <div class="crypto-overlay hidden" id="crypto-modal-overlay">
+        <div class="crypto-modal" id="crypto-modal">
+            <h2 id="modal-title">MISSION_COMPLETE</h2>
+            <p id="modal-message">ACCESS GRANTED. LEVEL 2 UNLOCKED.</p>
+            <button class="crypto-btn primary" id="modal-continue">CONTINUE</button>
+        </div>
+    </div>
+
+    <!-- About Screen -->
+    <section id="about-screen" class="screen hidden"
+        style="overflow-y:auto; align-items:flex-start; justify-content:flex-start;">
+        <!-- Animated Background -->
+        <div class="about-bg-layer">
+            <canvas id="about-canvas"></canvas>
+            <div class="about-scanlines"></div>
+            <div class="about-vignette"></div>
+        </div>
+
+        <!-- Nav Bar -->
+        <header class="about-header">
+            <div class="about-header-inner">
+                <div class="about-logo-area">
+                    <div class="about-title-main">ABOUT <span class="about-title-accent">US</span></div>
+                    <div class="about-title-sub">Strategic Interface // v2.04</div>
+                </div>
+                <div class="about-header-right">
+                    <div class="about-sys-status">
+                        <span class="about-sys-label">SYS_STATUS</span>
+                        <span class="about-sys-value">ONLINE</span>
+                    </div>
+                    <button class="about-back-btn" id="about-back-btn">← RETURN</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="about-main">
+            <!-- Hero Title -->
+            <div class="about-hero-badge">
+                <span class="about-hero-dot"></span>
+                <span class="about-hero-badge-text">Classified Personnel Data</span>
+            </div>
+
+            <div class="about-cybershield-title-wrap">
+                <div class="about-cybershield-glitch-container">
+                    <div class="about-cybershield-text about-cybershield-top">CYBERSHIELD</div>
+                    <div class="about-cybershield-text about-cybershield-bottom">CYBERSHIELD</div>
+                    <div class="about-cybershield-text about-cybershield-base">CYBERSHIELD</div>
+                </div>
+                <div class="about-club-subtitle" data-text="CLUB">CLUB</div>
+            </div>
+
+            <!-- Developers Heading -->
+            <div class="about-devs-heading">
+                <div class="about-devs-sub">System Architects</div>
+                <div class="about-devs-title">DEVELOPERS</div>
+                <div class="about-devs-line"></div>
+            </div>
+
+            <!-- Team Members -->
+            <div class="about-team-list">
+
+                <!-- Member 1 -->
+                <div class="about-member">
+                    <div class="about-member-left-bar"></div>
+                    <div class="about-member-avatar-container">
+                        <div class="avatar-ring"></div>
+                        <img src="assets/images/image_4.jpg" alt="N. Narasimha Rao" class="about-member-avatar-img">
+                    </div>
+                    <div class="about-member-body">
+                        <h3 class="about-member-name">N. NARASIMHA RAO</h3>
+                        <div class="about-member-meta">
+                            <span class="about-member-role">WEB DEVELOPER // AIML</span>
+                            <span class="about-member-sep">|</span>
+                            <span class="about-member-sem">2ND SEMESTER</span>
+                        </div>
+                        <p class="about-member-desc">Specialist in artificial intelligence and modern web architectures.
+                            Lead architect of the CyberForge AI interface deployed during the AMD Hackathon operations.
+                        </p>
+                        <div class="about-member-skills">
+                            <span class="about-skill">REACT</span>
+                            <span class="about-skill">AI/ML</span>
+                            <span class="about-skill">UI/UX</span>
+                            <span class="about-skill">SYSTEMS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 2 -->
+                <div class="about-member">
+                    <div class="about-member-left-bar"></div>
+                    <div class="about-member-avatar-container">
+                        <div class="avatar-ring"></div>
+                        <img src="assets/images/image_2.jpg" alt="Anudeep Yellugani" class="about-member-avatar-img">
+                    </div>
+                    <div class="about-member-body">
+                        <h3 class="about-member-name">ANUDEEP. Y</h3>
+                        <div class="about-member-meta">
+                            <span class="about-member-role">WEB DEV // VIDEO EDITOR</span>
+                            <span class="about-member-sep">|</span>
+                            <span class="about-member-sem">2ND SEMESTER</span>
+                        </div>
+                        <p class="about-member-desc">Creative operative blending code execution with visual
+                            storytelling. CO-architect for the CyberForge AI infrastructure for the AMD Hackathon
+                            initiative.</p>
+                        <div class="about-member-skills">
+                            <span class="about-skill">WEB DEV</span>
+                            <span class="about-skill">PREMIERE</span>
+                            <span class="about-skill">AI/ML</span>
+                            <span class="about-skill">DESIGN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 3 -->
+                <div class="about-member">
+                    <div class="about-member-left-bar"></div>
+                    <div class="about-member-avatar-container">
+                        <div class="avatar-ring"></div>
+                        <img src="assets/images/image_3.jpg" alt="Dhruv Sarin" class="about-member-avatar-img">
+                    </div>
+                    <div class="about-member-body">
+                        <h3 class="about-member-name">DHRUV SARIN</h3>
+                        <div class="about-member-meta">
+                            <span class="about-member-role">SENIOR DEVELOPER</span>
+                            <span class="about-member-sep">|</span>
+                            <span class="about-member-sem">SENIOR</span>
+                        </div>
+                        <p class="about-member-desc">Dhruv Sarin is a third-year B.Tech student and AI developer focused
+                            on deep learning and State-of-the-Art (SOTA) optimization. Off the clock, he's usually
+                            writing music or theory-crafting his next project.</p>
+                        <div class="about-member-skills">
+                            <span class="about-skill">FULL-STACK</span>
+                            <span class="about-skill">ARCHITECTURE</span>
+                            <span class="about-skill">MENTORSHIP</span>
+                            <span class="about-skill">BACKEND</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- The Guiding Force Heading -->
+            <div class="about-devs-heading" style="margin-top: 90px;">
+                <div class="about-devs-sub">Mentorship &amp; Leadership</div>
+                <div class="about-devs-title">THE GUIDING FORCE</div>
+                <div class="about-devs-line"></div>
+            </div>
+
+            <!-- Guiding Force Members -->
+            <div class="about-team-list">
+
+                <!-- Guiding Force Member 1 -->
+                <div class="about-member">
+                    <div class="about-member-left-bar"></div>
+                    <div class="about-member-avatar-container">
+                        <div class="avatar-ring"></div>
+                        <img src="assets/images/anchal_bhatt.jpg" alt="Prof. Anchal Bhatt" class="about-member-avatar-img">
+                    </div>
+                    <div class="about-member-body">
+                        <h3 class="about-member-name">ANCHAL BHATT</h3>
+                        <div class="about-member-meta">
+                            <span class="about-member-role">PROFESSOR</span>
+                            <span class="about-member-sep">|</span>
+                            <span class="about-member-sem">FACULTY MENTOR</span>
+                        </div>
+                        <p class="about-member-desc">Distinguished faculty mentor providing academic guidance, pedagogical support, and strategic oversight for the CyberForge platform and student initiatives.</p>
+                        <div class="about-member-skills">
+                            <span class="about-skill">MENTORSHIP</span>
+                            <span class="about-skill">ACADEMICS</span>
+                            <span class="about-skill">GUIDANCE</span>
+                            <span class="about-skill">RESEARCH</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guiding Force Member 2 -->
+                <div class="about-member">
+                    <div class="about-member-left-bar"></div>
+                    <div class="about-member-avatar-container">
+                        <div class="avatar-ring"></div>
+                        <img src="assets/images/manali_shukla.jpg" alt="Prof. Manali Shukla" class="about-member-avatar-img">
+                    </div>
+                    <div class="about-member-body">
+                        <h3 class="about-member-name">MANALI SHUKLA</h3>
+                        <div class="about-member-meta">
+                            <span class="about-member-role">AIML HOD</span>
+                            <span class="about-member-sep">|</span>
+                            <span class="about-member-sem">DEPARTMENT HEAD</span>
+                        </div>
+                        <p class="about-member-desc">Head of the Department of Artificial Intelligence &amp; Machine Learning, driving departmental innovation, research excellence, and patronizing student development initiatives.</p>
+                        <div class="about-member-skills">
+                            <span class="about-skill">LEADERSHIP</span>
+                            <span class="about-skill">AIML</span>
+                            <span class="about-skill">DEPARTMENT HEAD</span>
+                            <span class="about-skill">STRATEGY</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="about-footer">
+            <div class="about-footer-inner">
+                <div class="about-footer-side">
+                    <div class="about-footer-line-blue"></div><span class="about-footer-tag">End of File</span>
+                </div>
+                <div class="about-footer-center">
+                    Developed by <strong>N. Narasimha</strong>, <strong>Anudeep Yellugani</strong>, and <strong>Dhruv
+                        Sarin</strong>
+                </div>
+                <div class="about-footer-side" style="flex-direction:row-reverse;">
+                    <div class="about-footer-line-red"></div><span class="about-footer-tag">System Secure</span>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+    <!-- Bug Bounty Game Screen -->
+    <section id="bug-bounty-game-screen" class="screen hidden">
+        <canvas id="bug-bounty-grid-canvas" class="cyber-canvas"
+            style="position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.3;"></canvas>
+
+        <header class="bb-hud-premium">
+            <div class="bb-hud-left">
+                <div class="bb-hud-logo">NB</div>
+                <div class="bb-hud-protocol">NEURAL_BOOT_PROTOCOL v2.1 // STARK_INDUSTRIES</div>
+            </div>
+            <div class="bb-hud-center">
+                <span class="bb-timer-label">COUNTDOWN:</span>
+                <div class="bb-timer-value" id="bb-timer">000</div>
+            </div>
+            <div class="bb-hud-right">
+                <button class="back-btn" id="bb-exit-btn"
+                    style="padding: 5px 15px; font-size: 0.8rem; border: 1px solid #ff003c; color: #ff003c;">ABORT_MISSION</button>
+            </div>
+        </header>
+
+        <main class="bb-main-workspace">
+            <div class="bb-workspace-left">
+                <header class="bb-panel-header">
+                    <span class="bb-panel-title">SOURCE_KERNEL_TERMINAL</span>
+                    <div class="bb-lang-badge" id="bb-lang-label">SYSTEM_CORE</div>
+                </header>
+                <div class="bb-code-container">
+                    <pre><code class="bb-code-display" id="bb-code-display">
+                        <!-- Code injected here -->
+                    </code></pre>
+                </div>
+            </div>
+
+            <div class="bb-workspace-right">
+                <div class="bb-stats-panel">
+                    <div class="bb-stat-row">
+                        <span class="bb-stat-label">OPERATION_ID:</span>
+                        <span class="bb-stat-value" id="bb-mission-id">BB_NULL</span>
+                    </div>
+                    <div class="bb-stat-row">
+                        <span class="bb-stat-label">SYSTEM_INTEGRITY:</span>
+                        <span class="bb-stat-value"><span id="bb-integrity">100</span>%</span>
+                    </div>
+                    <div class="bb-integrity-bar">
+                        <div class="bb-integrity-fill" id="bb-integrity-bar-fill" style="width: 100%;"></div>
+                    </div>
+
+                    <div class="bb-stat-row" style="margin-top: 15px;">
+                        <span class="bb-stat-label">LEVEL_PROGRESS:</span>
+                        <span class="bb-stat-value" id="bb-progress">0/1</span>
+                    </div>
+                    <div class="bb-stat-row">
+                        <span class="bb-stat-label">LIVES_REMAINING:</span>
+                        <span class="bb-stat-value" id="bb-lives">2</span>
+                    </div>
+                </div>
+
+                <div class="bb-input-panel">
+                    <label class="bb-input-label">PATCH_SUBMISSION_LINE:</label>
+                    <input type="text" class="bb-user-input" id="bb-user-input"
+                        placeholder="Enter error details or patch fix..." autocomplete="off">
+
+                    <div class="bb-actions">
+                        <button class="bb-btn secondary" id="bb-hint-btn">REQUEST_HINT</button>
+                        <button class="bb-btn primary" id="bb-submit-btn">EXECUTE_PATCH</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="bb-feedback-overlay" id="bb-feedback">
+            <div class="bb-feedback-card">
+                <h2 class="bb-feedback-title" id="bb-feedback-title">STATUS</h2>
+                <p class="bb-feedback-msg" id="bb-feedback-msg">SYSTEM NOTIFICATION</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/js/script.js"></script>
+
+</body>
+
+</html>

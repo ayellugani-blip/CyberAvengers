@@ -1,0 +1,315 @@
+/* --- QUANTUM MISSION STYLES (STARK PROTOCOL STYLE) --- */
+
+#quantum-game-screen {
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-y: auto;
+    padding-bottom: 40px;
+    background: #020208;
+}
+
+.q-main-workspace {
+    display: flex;
+    width: 98%;
+    max-width: 1600px;
+    height: 82vh;
+    gap: 40px;
+    margin: 20px auto 0;
+    position: relative;
+    z-index: 10;
+}
+
+/* Left Panel: Code/Equation Display */
+.q-workspace-left {
+    flex: 1.5;
+    background: rgba(0, 10, 20, 0.7);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+}
+
+.q-panel-header {
+    background: rgba(0, 240, 255, 0.1);
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.q-panel-title {
+    font-family: 'Audiowide', sans-serif;
+    color: #00f0ff;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.q-lang-badge {
+    background: #00f0ff;
+    color: #000;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    border-radius: 3px;
+    font-weight: 700;
+}
+
+.q-code-container {
+    flex-grow: 1;
+    overflow: auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #fff;
+    white-space: pre-wrap;
+    position: relative;
+    tab-size: 4;
+}
+
+.q-code-display {
+    counter-reset: line;
+}
+
+.q-code-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+.q-code-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+.q-code-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 240, 255, 0.3);
+    border-radius: 4px;
+}
+
+/* Right Panel: Mission HUD */
+.q-workspace-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.q-stats-panel {
+    background: rgba(10, 15, 25, 0.85);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    padding: 20px;
+    border-radius: 10px;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 90% 100%, 0 100%);
+}
+
+.q-stat-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.q-stat-label {
+    color: rgba(0, 240, 255, 0.6);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.q-stat-value {
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+}
+
+.q-integrity-bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.q-integrity-fill {
+    height: 100%;
+    background: #00f0ff;
+    box-shadow: 0 0 10px #00f0ff;
+    transition: width 0.3s ease;
+}
+
+/* Input Area */
+.q-input-panel {
+    background: rgba(0, 10, 20, 0.6);
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    padding: 25px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.q-input-label {
+    font-size: 0.9rem;
+    color: #00f0ff;
+    letter-spacing: 2px;
+    font-family: 'Audiowide', sans-serif;
+}
+
+.q-user-input {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    color: #fff;
+    padding: 12px 15px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.q-user-input:focus {
+    border-color: #00f0ff;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.q-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.q-btn {
+    flex: 1;
+    padding: 12px;
+    font-family: 'Audiowide', sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    background: transparent;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.q-btn.primary {
+    border: 1px solid #00f0ff;
+    color: #00f0ff;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.q-btn.primary:hover {
+    background: rgba(0, 240, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.q-btn.secondary {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.q-btn.secondary:hover {
+    border-color: #fff;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Feedback Overlay */
+.q-feedback-overlay {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.q-feedback-overlay.show {
+    display: flex;
+}
+
+.q-feedback-card {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid #00f0ff;
+    padding: 30px 60px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.5);
+    animation: zoomFeedback 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.q-hud-premium {
+    width: 98%;
+    max-width: 1600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0 10px;
+    position: relative;
+    z-index: 10;
+    margin: 0 auto;
+}
+
+.q-hud-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.q-hud-logo {
+    font-family: 'Audiowide', sans-serif;
+    color: #00f0ff;
+    font-size: 1.5rem;
+    border: 1px solid #00f0ff;
+    padding: 5px 12px;
+}
+
+.q-hud-protocol {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    color: rgba(0, 240, 255, 0.6);
+}
+
+.q-hud-center {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.q-timer-label {
+    font-family: 'Audiowide', sans-serif;
+    color: rgba(0, 240, 255, 0.5);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+}
+
+.q-timer-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    color: #00f0ff;
+    font-weight: 700;
+    text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+}
+
+/* Difficulty Themes for Quantum */
+.quantum-initiate .q-stat-value, 
+.quantum-initiate .q-panel-title,
+.quantum-initiate .q-user-input:focus,
+.quantum-initiate .q-btn.primary,
+.quantum-initiate .q-feedback-card { color: #00f0ff; border-color: #00f0ff; }
+
+.quantum-operative .q-stat-value,
+.quantum-operative .q-panel-title,
+.quantum-operative .q-user-input:focus,
+.quantum-operative .q-btn.primary,
+.quantum-operative .q-feedback-card { color: #ffaa00; border-color: #ffaa00; }
+.quantum-operative .q-integrity-fill { background: #ffaa00; box-shadow: 0 0 10px #ffaa00; }
+
+.quantum-omega .q-stat-value,
+.quantum-omega .q-panel-title,
+.quantum-omega .q-user-input:focus,
+.quantum-omega .q-btn.primary,
+.quantum-omega .q-feedback-card { color: #ff003c; border-color: #ff003c; }
+.quantum-omega .q-integrity-fill { background: #ff003c; box-shadow: 0 0 10px #ff003c; }
